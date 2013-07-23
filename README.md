@@ -1,12 +1,12 @@
-# DuxtapeClient
+# Comptroller
 
-TODO: Write a gem description
+Client gem for the optimis duxtape service
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'duxtape_client'
+    gem 'comptroller'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install duxtape_client
+    $ gem install comptroller
 
 ## Usage
 
