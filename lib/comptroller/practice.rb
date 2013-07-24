@@ -1,6 +1,7 @@
 module Comptroller
   class Practice
     include Her::Model
+    use_api BILLING_API
     collection_path 'practices'
 
     #property :id, Serial

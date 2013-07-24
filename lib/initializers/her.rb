@@ -12,7 +12,8 @@ if defined? Rails
   end
 end
 
-Her::API.setup url: her_url do |c|
+BILLING_API = Her::API.new
+BILLING_API.setup url: her_url do |c|
   c.use Faraday::Request::UrlEncoded
   c.use Her::Middleware::DefaultParseJSON
   c.use Faraday::Adapter::NetHttp
