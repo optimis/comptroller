@@ -1,6 +1,6 @@
 require 'her'
 
-her_url = 'http://localhost:3001'
+her_url = 'http://127.0.0.1:3001'
 
 if defined? Rails
   her_url = case Rails.env
@@ -8,7 +8,7 @@ if defined? Rails
   when 'rc', 'megatron'
     'https://dux-canary-rc.optimispt.com'
   else
-    'http://localhost:3001'
+    'http://127.0.0.1:3001'
   end
 end
 
