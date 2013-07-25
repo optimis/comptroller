@@ -6,7 +6,6 @@ module Comptroller
     include_root_in_json true
 
     def eql?(other)
-      id          == other.id &&
       export_url  == other.export_url &&
       external_id == other.external_id &&
       token       == other.token
