@@ -2,47 +2,43 @@ require 'mimic'
 require 'socket'
 
 Mimic.mimic do
+  set :practices, {
+    1 => {
+      id: 1,
+      export_url: "https://optimis.duxware.com",
+      external_id: 3,
+      token: "12345",
+      migrated_at: nil,
+      billing: true,
+      created_at: "2013-07-16T01:16:45Z",
+      updated_at: "2013-07-16T01:16:45Z"
+    }
+  }
+
   get '/practices' do
-    [200, {}, [{
-        id: 1,
-        export_url: "https://optimis.duxware.com",
-        external_id: 3,
-        token: "12345",
-        migrated_at: nil,
-        billing: true,
-        created_at: "2013-07-16T01:16:45Z",
-        updated_at: "2013-07-16T01:16:45Z"
-      }].to_json
-    ]
+    [ 200, {}, settings.practices.values.to_json ]
   end
 
   get '/practices/:id' do
-    [200, {}, {
-        billing: false,
-        created_at: "2013-07-16T01:16:45Z",
-        export_url:  "https://optimis.duxware.com",
-        external_id: 3,
-        id: 1,
-        migrated_at: nil,
-        token:  "12345",
-        updated_at: "2013-07-16T01:16:45Z"
-      }.to_json
-    ]
+    [ 200, {}, settings.practices[params[:id].to_i].to_json ]
   end
 
   post '/practices' do
     practice_params = params[:practice]
-    [200, {}, {
-        billing: false,
-        created_at: "2013-07-16T01:16:45Z",
-        export_url: practice_params[:export_url],
-        external_id: practice_params[:external_id].to_i,
-        id: 1,
-        migrated_at: nil,
-        token: practice_params[:token],
-        updated_at: "2013-07-16T01:16:45Z"
-      }.to_json
-    ]
+    new_id = settings.practices.keys.max + 1 # fake auto incrementing private keys
+    new_practice = {
+      billing: false,
+      created_at: "2013-07-16T01:16:45Z",
+      export_url: practice_params[:export_url],
+      external_id: practice_params[:external_id].to_i,
+      id: 1,
+      migrated_at: nil,
+      token: practice_params[:token],
+      updated_at: "2013-07-16T01:16:45Z"
+    }
+
+    settings.practices[new_id] = new_practice
+    [ 200, {}, new_practice.to_json ]
   end
 
   get '/duxware_errors' do
