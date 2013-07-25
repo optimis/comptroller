@@ -31,7 +31,7 @@ Mimic.mimic do
       created_at: "2013-07-16T01:16:45Z",
       export_url: practice_params[:export_url],
       external_id: practice_params[:external_id].to_i,
-      id: 1,
+      id: new_id,
       migrated_at: nil,
       token: practice_params[:token],
       updated_at: "2013-07-16T01:16:45Z"
