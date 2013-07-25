@@ -16,6 +16,21 @@ Mimic.mimic do
     ]
   end
 
+  post '/practices' do
+    practice_params = params[:practice]
+    [200, {}, {
+        billing: false,
+        created_at: "2013-07-16T01:16:45Z",
+        export_url: practice_params[:export_url],
+        external_id: practice_params[:external_id].to_i,
+        id: 1,
+        migrated_at: nil,
+        token: practice_params[:token],
+        updated_at: "2013-07-16T01:16:45Z"
+      }.to_json
+    ]
+  end
+
   get '/duxware_errors' do
     [200, {}, [{
         error_message: 'Send to optimis.duxware.com failed with ERROR: Did not find this ICD code in DB: 729.90',

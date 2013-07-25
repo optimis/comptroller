@@ -3,12 +3,7 @@ module Comptroller
     include Her::Model
     use_api BILLING_API
     collection_path 'practices'
-
-    #property :id, Serial
-    #property :export_url, String, :required => true
-    #property :billing, Boolean
-    #property :external_id, Integer, :required => true
-    #property :token, String
+    include_root_in_json true
 
     def eql?(other)
       id          == other.id &&
