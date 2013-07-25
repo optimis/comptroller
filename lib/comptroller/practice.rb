@@ -11,7 +11,10 @@ module Comptroller
     #property :token, String
 
     def eql?(other)
-      id == other.id
+      id          == other.id &&
+      export_url  == other.export_url &&
+      external_id == other.external_id &&
+      token       == other.token
     end
   end
 end
