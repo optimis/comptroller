@@ -1,8 +1,8 @@
 require 'mimic'
 require 'socket'
 
-Mimic.mimic do
-  set :practices, {
+class DataManager
+  MEMO = {
     1 => {
       id: 1,
       export_url: "https://optimis.duxware.com",
@@ -14,18 +14,31 @@ Mimic.mimic do
       updated_at: "2013-07-16T01:16:45Z"
     }
   }
+  @practices = nil
 
+  class << self
+    def practices
+      @practices ||= MEMO.dup
+    end
+
+    def reset
+      @practices = nil
+    end
+  end
+end
+
+Mimic.mimic do
   get '/practices' do
-    [ 200, {}, settings.practices.values.to_json ]
+    [ 200, {}, DataManager.practices.values.to_json ]
   end
 
   get '/practices/:id' do
-    [ 200, {}, settings.practices[params[:id].to_i].to_json ]
+    [ 200, {}, DataManager.practices[params[:id].to_i].to_json ]
   end
 
   post '/practices' do
     practice_params = params[:practice]
-    new_id = settings.practices.keys.max + 1 # fake auto incrementing private keys
+    new_id = DataManager.practices.keys.max + 1 # fake auto incrementing private keys
     new_practice = {
       billing: false,
       created_at: "2013-07-16T01:16:45Z",
@@ -37,18 +50,18 @@ Mimic.mimic do
       updated_at: "2013-07-16T01:16:45Z"
     }
 
-    settings.practices[new_id] = new_practice
+    DataManager.practices[new_id] = new_practice
     [ 200, {}, new_practice.to_json ]
   end
 
   put '/practices/:id' do
-    practice = settings.practices[params[:id].to_i]
+    practice = DataManager.practices[params[:id].to_i]
     practice.merge!(params[:practice])
     [ 200, {}, practice.to_json ]
   end
 
   delete '/practices/:id' do
-    deleted_practice = settings.practices.extract!(params[:id].to_i)[params[:id].to_i]
+    deleted_practice = DataManager.practices.extract!(params[:id].to_i)[params[:id].to_i]
     [ 200, {}, deleted_practice.to_json ]
   end
 
@@ -64,5 +77,9 @@ Mimic.mimic do
         updated_at: "2013-06-13T16:17:02Z"
       }].to_json
     ]
+  end
+
+  get '/resets' do
+    DataManager.reset
   end
 end
