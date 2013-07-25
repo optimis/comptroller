@@ -47,6 +47,11 @@ Mimic.mimic do
     [ 200, {}, practice.to_json ]
   end
 
+  delete '/practices/:id' do
+    deleted_practice = settings.practices.extract!(params[:id].to_i)[params[:id].to_i]
+    [ 200, {}, deleted_practice.to_json ]
+  end
+
   get '/duxware_errors' do
     [200, {}, [{
         error_message: 'Send to optimis.duxware.com failed with ERROR: Did not find this ICD code in DB: 729.90',

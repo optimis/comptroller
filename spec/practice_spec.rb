@@ -20,5 +20,11 @@ module Comptroller
       expect(Practice.save_existing(1, :export_url => 'https://optimis.webpt.com')).to be_true
       expect(Practice.find(1).export_url).to eql('https://optimis.webpt.com')
     end
+
+    it 'deletes practices' do
+      Practice.destroy_existing(1)
+      practice_ids = Practice.all.map(&:id)
+      expect(practice_ids.include?(1)).to be_false
+    end
   end
 end
