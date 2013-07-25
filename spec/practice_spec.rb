@@ -10,5 +10,10 @@ module Comptroller
       practice = Practice.create(:external_id => 5, :export_url => 'http://hello.world', :token => '12345')
       expect(practice).to eql(Practice.new(:id => 1, :external_id => 5, :export_url => 'http://hello.world', :token => '12345'))
     end
+
+    it 'retrieves practice by id' do
+      practice = Practice.find(1)
+      expect(practice).to eql(Practice.new(:id => 1, :external_id => 3, :export_url => 'https://optimis.duxware.com', :token => '12345'))
+    end
   end
 end

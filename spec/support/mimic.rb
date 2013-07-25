@@ -16,6 +16,20 @@ Mimic.mimic do
     ]
   end
 
+  get '/practices/:id' do
+    [200, {}, {
+        billing: false,
+        created_at: "2013-07-16T01:16:45Z",
+        export_url:  "https://optimis.duxware.com",
+        external_id: 3,
+        id: 1,
+        migrated_at: nil,
+        token:  "12345",
+        updated_at: "2013-07-16T01:16:45Z"
+      }.to_json
+    ]
+  end
+
   post '/practices' do
     practice_params = params[:practice]
     [200, {}, {
