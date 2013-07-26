@@ -1,8 +1,9 @@
-require 'spec/fake_server'
 require 'support/reset_helper'
 require 'comptroller'
+require 'spec/fake_server'
 
-her_url = ENV['API_URL'] || 'http://127.0.0.1:11988'
+her_url = ENV['API_URL'] || "http://127.0.0.1:#{Comptroller::DEFAULT_PORT}"
+ 
 
 BILLING_API = Her::API.new
 BILLING_API.setup url: her_url do |c|

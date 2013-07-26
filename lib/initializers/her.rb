@@ -7,6 +7,8 @@ if defined? Rails
   when 'production'
   when 'rc', 'megatron'
     'https://dux-canary-rc.optimispt.com'
+  when 'test','integration'
+    "http://127.0.0.1:#{Comptroller::DEFAULT_PORT}"
   else
     'http://127.0.0.1:3001'
   end

@@ -27,7 +27,7 @@ class DataManager
   end
 end
 
-Mimic.mimic do
+Mimic.mimic(:port => Comptroller::DEFAULT_PORT) do
   get '/practices' do
     [ 200, {}, DataManager.practices.values.to_json ]
   end
