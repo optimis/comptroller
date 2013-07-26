@@ -1,4 +1,4 @@
-require 'support/mimic'
+require 'spec/fake_server'
 require 'support/reset_helper'
 require 'comptroller'
 
