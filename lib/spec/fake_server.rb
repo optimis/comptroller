@@ -27,7 +27,11 @@ class DataManager
   end
 end
 
-Mimic.mimic(:port => Comptroller::DEFAULT_PORT) do
+Mimic.mimic(:port => Comptroller::Configuration::PORT) do
+  if defined?(Rails)
+    p "[NOTICE] Starting fake billing service on port #{Comptroller::Configuration::PORT}"
+  end
+
   get '/practices' do
     [ 200, {}, DataManager.practices.values.to_json ]
   end

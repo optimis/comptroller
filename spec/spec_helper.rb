@@ -2,7 +2,7 @@ require 'support/reset_helper'
 require 'comptroller'
 require 'spec/fake_server'
 
-her_url = ENV['API_URL'] || "http://127.0.0.1:#{Comptroller::DEFAULT_PORT}"
+her_url = ENV['API_URL'] || "http://127.0.0.1:#{Comptroller::Configuration::PORT}"
  
 
 BILLING_API = Her::API.new
