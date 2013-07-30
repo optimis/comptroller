@@ -12,7 +12,7 @@ BILLING_API.setup url: her_url do |c|
   c.use Faraday::Adapter::NetHttp
 end
 
-Rspec.configure do |config|
+RSpec.configure do |config|
   config.after do
     Comptroller::ResetHelper.reset
   end
