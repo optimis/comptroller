@@ -5,6 +5,7 @@ her_url = 'http://127.0.0.1:3001'
 if defined? Rails
   her_url = case Rails.env
   when 'production'
+    'https://duxware.optimispt.com'
   when 'rc', 'megatron'
     'https://dux-canary-rc.optimispt.com'
   when 'test','integration'
