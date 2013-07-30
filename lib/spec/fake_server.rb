@@ -2,27 +2,28 @@ require 'mimic'
 require 'socket'
 
 class DataManager
-  MEMO = {
-    1 => {
-      id: 1,
-      export_url: "https://optimis.duxware.com",
-      external_id: 3,
-      token: "12345",
-      migrated_at: nil,
-      billing: true,
-      created_at: "2013-07-16T01:16:45Z",
-      updated_at: "2013-07-16T01:16:45Z"
-    }
-  }
-  @practices = nil
-
   class << self
+    def memo
+      {
+        1 => {
+          id: 1,
+          export_url: "https://optimis.duxware.com",
+          external_id: 3,
+          token: "12345",
+          migrated_at: nil,
+          billing: true,
+          created_at: "2013-07-16T01:16:45Z",
+          updated_at: "2013-07-16T01:16:45Z"
+        }
+      }
+    end
+
     def practices
-      @practices ||= MEMO.dup
+      @practices || memo.dup
     end
 
     def reset
-      @practices = nil
+      @practices = memo.dup
     end
   end
 end
