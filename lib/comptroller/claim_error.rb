@@ -5,6 +5,8 @@ module Comptroller
     collection_path '/duxware_errors'
     include_root_in_json true
 
+    attributes :error_message, :created_at, :external_id
+
     def eql?(other)
       id.eql? other.id
     end 
