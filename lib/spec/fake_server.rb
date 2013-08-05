@@ -3,9 +3,8 @@ require 'socket'
 
 class DataManager
   class << self
-    def memo
-      {
-        1 => {
+    def practices_memo
+      { 1 => {
           id: 1,
           export_url: "https://optimis.duxware.com",
           external_id: 3,
@@ -18,12 +17,31 @@ class DataManager
       }
     end
 
+    def claim_errors_memo
+      { 1 => {
+          error_message: 'Send to optimis.duxware.com failed with ERROR: Did not find this ICD code in DB: 729.90',
+          external_id: 3,
+          id: 1,
+          message_body: '<?xml version="1.0" encoding="UTF-8"?><incomingHeader></incomingHeader>',
+          record_id: 43334,
+          resent_at: nil,
+          created_at: "2013-06-13T16:17:02Z",
+          updated_at: "2013-06-13T16:17:02Z"
+        }
+      }
+    end
+
     def practices
-      @practices || memo.dup
+      @practices ||= practices_memo.dup
     end
 
     def reset
-      @practices = memo.dup
+      @claim_errors = claim_errors_memo.dup
+      @practices = practices_memo.dup
+    end
+
+    def claim_errors
+      @claim_errors ||= claim_errors_memo.dup
     end
   end
 end
@@ -71,19 +89,25 @@ Mimic.mimic(:port => Comptroller::Configuration::PORT) do
   end
 
   get '/duxware_errors' do
-    [200, {}, [{
-        error_message: 'Send to optimis.duxware.com failed with ERROR: Did not find this ICD code in DB: 729.90',
-        external_id: 3,
-        id: 1,
-        message_body: '<?xml version="1.0" encoding="UTF-8"?><incomingHeader></incomingHeader>',
-        record_id: 43334,
-        resent_at: nil,
-        created_at: "2013-06-13T16:17:02Z",
-        updated_at: "2013-06-13T16:17:02Z"
-      }].to_json
-    ]
+    [ 200, {}, DataManager.claim_errors.values.to_json ]
   end
 
+  get '/duxware_errors/:id' do
+    [ 200, {}, DataManager.claim_errors[params[:id].to_i].to_json ]
+  end
+
+  put '/duxware_errors/:id' do
+    claim_error = DataManager.claim_errors[params[:id].to_i]
+    claim_error.merge!(params[:claim_error])
+    [ 200, {}, claim_error.to_json ]
+  end
+
+  delete '/duxware_errors/:id' do
+    DataManager.claim_errors[params[:id].to_i]
+    deleted_error = DataManager.claim_errors.extract!(params[:id].to_i)[params[:id].to_i]
+    [ 200, {}, deleted_error.to_json ]
+  end
+  
   get '/resets' do
     DataManager.reset
   end
