@@ -7,6 +7,12 @@ module Comptroller
 
     attributes :error_message, :created_at, :external_id
 
+    def self.count
+      get_raw(:count) do |parsed_data, response|
+        parsed_data[:data][:count] 
+      end
+    end
+
     def eql?(other)
       id.eql? other.id
     end 

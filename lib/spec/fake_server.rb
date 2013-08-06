@@ -88,6 +88,10 @@ Mimic.mimic(:port => Comptroller::Configuration::PORT) do
     [ 200, {}, deleted_practice.to_json ]
   end
 
+  get '/duxware_errors/count' do
+    [ 200, {}, { :count => 1 }.to_json ]
+  end
+
   get '/duxware_errors' do
     [ 200, {}, DataManager.claim_errors.values.to_json ]
   end

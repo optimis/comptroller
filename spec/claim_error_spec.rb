@@ -16,5 +16,9 @@ module Comptroller
       error = ClaimError.save_existing(1, :message_body => 'foo bar')
       expect(ClaimError.find(1).message_body).to eql('foo bar')
     end
+
+    it 'defines count' do
+      expect(ClaimError.count).to eql(1)
+    end
   end
 end
