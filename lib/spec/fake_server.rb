@@ -29,11 +29,11 @@ class DataManager
           updated_at: "2013-06-13T16:17:02Z"
         },
         2 => {
-          error_message: 'Send to optimis.duxware.com failed with ERROR: Did not find this ICD code in DB: 729.90',
+          error_message: 'Send to optimis.duxware.com failed with ERROR: Did not find this ICD code in DB: 729.91',
           external_id: 4,
-          id: 1,
+          id: 2,
           message_body: '<?xml version="1.0" encoding="UTF-8"?><incomingHeader></incomingHeader>',
-          record_id: 43334,
+          record_id: 43335,
           resent_at: nil,
           created_at: "2013-06-13T16:17:02Z",
           updated_at: "2013-06-13T16:17:02Z"
