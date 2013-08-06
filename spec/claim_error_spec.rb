@@ -6,6 +6,11 @@ module Comptroller
       expect(ClaimError.all.first).to eql(ClaimError.new(:id => 1))
     end
 
+    it 'retrieves claim errors by external_id' do
+      expect(ClaimError.where(:external_id => 3).size).to eql(1)
+      expect(ClaimError.where(:external_id => 3).first).to eql(ClaimError.new(:id => 1))
+    end
+
     it 'allows deleting of claim errors' do
       error = ClaimError.all.first
       ClaimError.destroy_existing(error.id)

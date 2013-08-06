@@ -111,7 +111,14 @@ Mimic.mimic(:port => Comptroller::Configuration::PORT) do
   end
 
   get '/duxware_errors' do
-    [ 200, {}, DataManager.claim_errors.values.to_json ]
+    claim_errors = if params[:external_id]
+      DataManager.claim_errors.values.select do |claim_error|
+        claim_error[:external_id] == params[:external_id].to_i
+      end
+    else
+      DataManager.claim_errors.values
+    end
+    [ 200, {}, claim_errors.to_json ]
   end
 
   get '/duxware_errors/:id' do
