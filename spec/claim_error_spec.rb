@@ -17,8 +17,14 @@ module Comptroller
       expect(ClaimError.find(1).message_body).to eql('foo bar')
     end
 
-    it 'defines count' do
-      expect(ClaimError.count).to eql(1)
+    describe '.count' do
+      it 'returns total number of claim errors' do
+        expect(ClaimError.count).to eql(2)
+      end
+
+      it 'returns total number of claim errors for given external id' do
+        expect(ClaimError.count(:external_id => 3)).to eql(1)
+      end
     end
   end
 end

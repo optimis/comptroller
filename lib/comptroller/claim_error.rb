@@ -7,8 +7,8 @@ module Comptroller
 
     attributes :error_message, :created_at, :external_id
 
-    def self.count
-      get_raw(:count) do |parsed_data, response|
+    def self.count(opts={})
+      get_raw(:count, opts) do |parsed_data, response|
         parsed_data[:data][:count] 
       end
     end
