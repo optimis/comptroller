@@ -9,7 +9,7 @@ module Comptroller
     it 'allows deleting of claim errors' do
       error = ClaimError.all.first
       ClaimError.destroy_existing(error.id)
-      expect(ClaimError.all).to be_empty
+      expect(ClaimError.all).to_not include(error)
     end
 
     it 'allows updating of errors' do
