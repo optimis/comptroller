@@ -1,5 +1,5 @@
 module Comptroller
   class Configuration
-    PORT = 11999
+    PORT = 3020
   end
 end
