@@ -7,7 +7,7 @@ if defined? Rails
   when 'production'
     'https://duxware.optimispt.com'
   when 'rc', 'megatron'
-    'https://dux-canary-rc.optimispt.com'
+    'https://duxware-rc.optimispt.com'
   when 'test','integration'
     "http://127.0.0.1:#{Comptroller::Configuration::PORT}"
   else
