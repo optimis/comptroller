@@ -56,7 +56,7 @@ class DataManager
   end
 end
 
-Mimic.mimic(:port => Comptroller::Configuration::PORT) do
+Mimic.mimic(:hostname => Comptroller::Configuration::HOSTNAME, :port => Comptroller::Configuration::PORT) do
   if defined?(Rails)
     p "[NOTICE] Starting fake billing service on port #{Comptroller::Configuration::PORT}"
   end
