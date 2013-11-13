@@ -1,6 +1,6 @@
 require 'her'
 
-her_url = 'http://127.0.0.1:3001'
+her_url = 'http://127.0.0.1:3002'
 
 if defined? Rails
   her_url = case Rails.env
@@ -11,7 +11,7 @@ if defined? Rails
   when 'test','integration'
     "http://127.0.0.1:#{Comptroller::Configuration::PORT}"
   else
-    'http://127.0.0.1:3001'
+    'http://127.0.0.1:3002'
   end
 end
 
