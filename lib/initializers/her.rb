@@ -11,7 +11,7 @@ if defined? Rails
   when 'test','integration'
     "http://127.0.0.1:#{Comptroller::Configuration::PORT}"
   else
-    'http://127.0.0.1:3002'
+    ENV['DUXTAPE_API_URL'] ? ENV['DUXTAPE_API_URL'] : 'http://127.0.0.1:3002'
   end
 end
 
