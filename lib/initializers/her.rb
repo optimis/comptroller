@@ -8,6 +8,8 @@ if defined? Rails
     'https://duxware.optimispt.com'
   when 'rc', 'megatron'
     'https://duxware-rc.optimispt.com'
+  when 'staging'
+    'https://duxware-staging.optimispt.com'
   when 'test','integration'
     "http://127.0.0.1:#{Comptroller::Configuration::PORT}"
   else
