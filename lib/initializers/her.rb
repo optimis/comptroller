@@ -1,6 +1,6 @@
 require 'her'
 
-BILLING_CONFIG = YAML.load_file(Rails.root.join('config/optimis_billing.yml'))[Rails.env]
+BILLING_CONFIG = YAML.load_file('config/optimis_billing.yml')[Rails.env]
 ENV['DUXTAPE_API_URL'] = BILLING_CONFIG['duxtape_api_url']
 
 her_url = 'http://127.0.0.1:3002'
