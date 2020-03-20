@@ -4,12 +4,6 @@ her_url = 'http://127.0.0.1:3002'
 
 if defined? Rails
   her_url = case Rails.env
-  when 'production'
-    'https://duxware.optimispt.com'
-  when 'rc', 'megatron'
-    'https://duxware-rc.optimispt.com'
-  when 'staging'
-    'https://duxware-staging.optimispt.com'
   when 'test','integration'
     "http://127.0.0.1:#{Comptroller::Configuration::PORT}"
   else
